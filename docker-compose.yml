@@ -1,0 +1,40 @@
+version: '3.6' # docker-composeで使用するバージョンを定義
+services: # Docker-Composeでは、アプリケーションを動かすための各要素
+  db: # services名
+    image: mysql:8.0 # コンテナを実行時に元となるイメージを指定
+    restart: always # restart コンテナが停止した際の再起動設定   always 明示的に stop がされない限り、終了ステータスに関係なく常に再起動が行われる
+    volumes:
+      - db-data:/var/lib/mysql
+    environment: #環境変数追加
+      - MYSQL_DATABASE=smabro_app_db
+      - MYSQL_ROOT_USER=root #デフォルトのスーパーユーザー
+      - MYSQL_ROOT_PASSWORD=root #デフォルトのスーパーユーザーのパスワード
+      - TZ=Asia/Tokyo #タイムゾーン
+    ports:
+      - '3306:3306'
+    networks:
+      - back-tier
+  be:
+    build: . #buildする Dockerfileのディレクトリを指定
+    command: ["sleep", "infinity"]
+    volumes:
+      - .:/smabroApp
+    environment:
+      spring.datasource.driver-class-name: "com.mysql.cj.jdbc.Driver"
+      spring.datasource.url: "jdbc:mysql://db/smabro_app_db?serverTimezone=JST"
+      spring.datasource.username: "root"
+      spring.datasource.password: "root"
+    ports: # 公開用のポート ホスト側:コンテナ側
+      - "80:80" # springbootのポート
+      - "8080:8080" # コンテナ上でnpm run serveで開いたポート8080をlocalhost8080とつなげる
+    depends_on: # web起動時にdbを起動する
+      - db
+    networks:
+      - front-tier
+      - back-tier
+
+networks:
+  front-tier:
+  back-tier:
+volumes:
+  db-data:

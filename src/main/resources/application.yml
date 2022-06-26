@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/rookie_review_tool_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    sql-script-encoding: utf-8
+#    initialization-mode: always
+
+mybatis:
+  mapper-locations: classpath*:/sql/*/*.xml
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: 1050740063200-o720s2sqlfubm5m6tut0ulvamj0rg7uq.apps.googleusercontent.com
+#            client-secret: bUa2ColeCGEqffrrrWhahf2i
+#            #redirect-uri: 'http://localhost:8080/login/oauth2/code/{registrationId}'
+#            # ログイン後に表示するフロントエンドのURL
+#            redirect-front-url: 'https://localhost:8081/'

@@ -1,0 +1,47 @@
+### hello
+GET http://localhost:8080/v1/users/hello
+
+### findByName
+GET http://localhost:8080/v1/users/testUser
+
+### createUser
+POST http://localhost:8080/v1/users/
+Content-Type: application/json
+
+{
+  "name": "testUser",
+  "password": "password",
+  "contribution": 50,
+  "bio": "よろしくお願いいたします"
+}
+
+### updateUser
+PUT http://localhost:8080/v1/users/1
+Content-Type: application/json
+
+{
+  "name": "updateUser",
+  "password": "updatePassword",
+  "contribution": 22,
+  "bio": "更新しました"
+}
+
+### deleteUser
+DELETE http://localhost:8080/v1/users/2
+
+### createArticle
+POST http://localhost:8080/v1/articles/
+Content-Type: application/json
+Cookie: JSESSIONID=0F2E0D38787042C3C780FDD8524334FF
+
+{
+  "tag": "SpringBoot",
+  "title": "Java環境構築",
+  "detail": "バージョンは~~~です"
+}
+
+### findArticle
+GET http://localhost:8080/v1/articles/SpringBoot
+
+### findRoom
+GET http://localhost:8080/v1/rooms/room1

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rookie_review_tool.infrastructure.mapper.ArticleMapper">
+
+    <insert id="create" parameterType="com.example.rookie_review_tool.domain.model.Article">
+        insert into rookie_review_tool_db.articles (user_id, tag, title, detail)
+        values (#{userId}, #{tag}, #{title}, #{detail})
+    </insert>
+
+    <select id="findByString" parameterType="string" resultType="com.example.rookie_review_tool.domain.model.Article">
+        select user_id, tag, title, detail
+        from rookie_review_tool_db.articles
+        where tag = #{searchString}
+    </select>
+
+<!--    <update id="updateUser" parameterType="com.example.rookie_review_tool.domain.model.User">-->
+<!--        update rookie_review_tool_db.Users set-->
+<!--                                               name = #{user.name}, password = #{user.password}, contribution = #{user.contribution}, bio = #{user.bio}-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteUser" parameterType="integer">-->
+<!--        delete from rookie_review_tool_db.users-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+</mapper>
